@@ -48,7 +48,7 @@ export function CreateTorrentDialog({ children }: { children: React.ReactNode })
     setBusy(true)
     try {
       const { torrent, nfo } = await createTorrent(file, { announce, comment })
-      download(torrent, `${file.name}.torrent`)
+      download(new Uint8Array(torrent), `${file.name}.torrent`)
       download(nfo, `${file.name}.nfo`)
       toast.success(t("common.create_success", "Torrent created"))
       handleOpenChange(false)
