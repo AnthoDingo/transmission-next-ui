@@ -3,8 +3,11 @@
 import * as React from "react"
 import en from "@/locales/en.json"
 import zh from "@/locales/zh.json"
+import fr from "@/locales/fr.json"
 
-type Locale = "en" | "zh"
+type Locale = "en" | "zh" | "fr"
+
+const messages = { en, zh, fr }
 
 const I18nContext = React.createContext<{
   locale: Locale
@@ -13,12 +16,12 @@ const I18nContext = React.createContext<{
 } | null>(null)
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = React.useState<Locale>("zh")
+  const [locale, setLocaleState] = React.useState<Locale>("en")
 
   // Load locale from storage on mount
   React.useEffect(() => {
     const savedLocale = localStorage.getItem("transmission-locale") as Locale
-    if (savedLocale && (savedLocale === "en" || savedLocale === "zh")) {
+    if (savedLocale && savedLocale in messages) {
       setLocaleState(savedLocale)
     }
   }, [])
@@ -29,7 +32,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   }
 
   const t = (path: string, args?: Record<string, unknown> | string, defaultValue?: string): string => {
-    const data = locale === "en" ? en : zh
+    const data = messages[locale]
     const keys = path.split(".")
     let current: unknown = data
     for (const key of keys) {

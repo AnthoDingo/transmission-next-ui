@@ -32,7 +32,7 @@ export function LanguageSwitcher() {
           "h-10 w-10 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-full transition-all",
           isOpen && "bg-muted text-primary"
         )}
-        title={locale === "en" ? "Language" : "语言"}
+        title={locale === "zh" ? "语言" : locale === "fr" ? "Langue" : "Language"}
       >
         <Languages className="h-5 w-5" />
       </Button>
@@ -65,6 +65,19 @@ export function LanguageSwitcher() {
                 <span>简体中文</span>
               </div>
               {locale === "zh" && <Check className="h-3.5 w-3.5" />}
+            </button>
+            <button
+              onClick={() => { setLocale("fr"); setIsOpen(false); }}
+              className={cn(
+                "flex items-center justify-between gap-3 px-3 py-2 text-sm font-medium rounded-xl transition-colors w-full text-left",
+                locale === "fr" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground"
+              )}
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-semibold w-4 text-center">FR</span>
+                <span>Français</span>
+              </div>
+              {locale === "fr" && <Check className="h-3.5 w-3.5" />}
             </button>
           </div>
         </div>
