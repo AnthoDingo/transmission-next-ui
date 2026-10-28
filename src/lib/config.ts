@@ -1,5 +1,5 @@
 export const APP_CONFIG = {
   version: "0.3.4",
-  githubUrl: "https://github.com/hisproc/transmission-next-ui",
+  githubUrl: "https://github.com/AnthoDingo/transmission-next-ui",
   name: "Transmission Next"
 }
