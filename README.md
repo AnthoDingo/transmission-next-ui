@@ -1,79 +1,70 @@
 <h1 align="center" style="border-bottom: none;"><img src="public/favicon.svg" width="24" style="vertical-align: middle; margin-right: 8px;" /> Transmission Next UI</h1>
-<h3 align="center"> 一个Transmission的第三方Web UI，使用shadcn/ui和Vite构建。</h3>
+<h3 align="center"> A third-party modern web-based frontend for Transmission, offering a sleek and responsive UI for managing your torrents with ease, built using shadcn/ui and Vite. </h3>
 
-<p align="center">
-  <img alt="GitHub License" src="https://img.shields.io/github/license/hisproc/transmission-next-ui">
-  <img alt="GitHub Release" src="https://img.shields.io/github/release/hisproc/transmission-next-ui">
-  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/hisproc/transmission-next-ui/build.yml">
-</p>
+## Tech Stack
 
----
-
-## 技术栈
-
-- **前端框架**: [React 19](https://react.dev/) + [Vite 7](https://vite.dev/)
-- **CSS 框架**: [Tailwind CSS 4.0](https://tailwindcss.com/)
-- **组件库**: [shadcn/ui](https://ui.shadcn.com/)
-- **图标库**: [Lucide React](https://lucide.dev/)
-- **路由管理**: [React Router 7](https://reactrouter.com/)
+- **Framework**: [React 19](https://react.dev/) + [Vite 7](https://vite.dev/)
+- **Styling**: [Tailwind CSS 4.0](https://tailwindcss.com/)
+- **Components**: [shadcn/ui](https://ui.shadcn.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Routing**: [React Router 7](https://reactrouter.com/)
 
 ---
 
-简体中文 | [English](README_EN.md)
+English | [简体中文](README.ch.md) | [Français](README.fr.md)
 
+## Preview
 
-## 预览
-
-[**在线演示 (Live Demo)**](https://transmission-next-ui-demo.pages.dev)
+[**Live Demo**](https://transmission-next-ui-demo.pages.dev)
 
 | Light Mode | Dark Mode |
 | :---: | :---: |
-| ![dashboard_light.png](pic/dashboard_light.png) | ![dashboard_dark.png](pic/dashboard_dark.png) |
+| ![dashboard_light_en.png](pic/dashboard_light_en.png) | ![dashboard_dark_en.png](pic/dashboard_dark_en.png) |
 
 | Torrent Details | Settings |
 | :---: | :---: |
-| ![torrent_details.png](pic/torrent_details.png) | ![settings.png](pic/settings.png) |
+| ![torrent_details_en.png](pic/torrent_details_en.png) | ![settings_en.png](pic/settings_en.png) |
 
-## 功能
+## Features
 
-- 现代化 UI 设计
-- 响应式布局，适配所有设备
-- 适配 Transmission 4.0+ 版本
-- [x] 种子管理，信息查看
-- [x] 配置设置
-- [x] 拖拽/粘贴添加种子
-- [x] 深色模式支持
-- [x] Tracker 过滤
-- [x] 支持种子标签
-- [x] 批量替换 Tracker
-- [x] 批量移动下载目录
-- [x] 批量设置种子标签
+- Modern UI Design
+- Responsive Layout, Perfect for All Devices
+- Powered by Vite and Tailwind CSS 4.0
+- [x] Torrent Management and Information Viewing
+- [x] Configuration Settings
+- [x] Drag-and-Drop/Paste to Add Torrents
+- [x] Dark Mode Support
+- [x] Tracker Filter
+- [x] Torrent Label Support
+- [x] Batch Replace Trackers
+- [x] Batch Move Download Directory
+- [x] Batch Set Torrent Labels
 
-⚠️本项目为早期版本，尚未经过完整测试，正式使用前请自行验证其功能是否符合预期。
+⚠️**Notice**: This is an early version of the project. It has not been fully tested yet. Please verify its functionality before using it in production.
 
-## 快速开始
+## Quick Start
 
-可以通过三种方式部署 Transmission Next UI，另外提供对于[群辉](doc/NasInstall.md#群辉)和[飞牛OS](doc/NasInstall.md#飞牛OS)的安装指引:
+You can deploy Transmission Next UI in three different ways:
 
-### 1. 一键安装
+### 1. Easy Install
 
-> 依赖环境：`docker`、`docker-compose` 和 `curl`
+> Requires: `docker`, `docker-compose`, and `curl`
 
 > [!TIP]
-> 建议先创建一个专用目录来存放相关文件，例如：
+> It's recommended to create a dedicated directory for your files first:
 > ```bash
 > mkdir -p ~/transmission && cd ~/transmission
 > ```
 
-初次安装或升级到最新版本，运行以下命令：
+To install web UI or upgrade to the latest version, run the following command:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/hisproc/transmission-next-ui/main/download.sh | bash
 ```
 
-执行后将在当前目录生成一个 `docker-compose.yml` 文件。
+This will download the latest release and create a `docker-compose.yml` file in your current directory.
 
-编辑该文件来自定义 Transmission 的用户名、密码和时区：
+You can now modify the `docker-compose.yml` file to set your own **Transmission username**, **password**, and **timezone**:
 
 ```yaml
 environment:
@@ -82,29 +73,30 @@ environment:
   - TZ=Asia/Shanghai
 ```
 
-然后通过以下命令启动或停止服务：
+Then use the following commands to start or stop the service:
 
 ```bash
-docker-compose up -d   # 后台启动
-docker-compose down    # 停止并移除容器
+docker-compose up -d   # start in background
+docker-compose down    # stop and remove the container
 ```
 
-默认使用端口映射方式，映射了以下两个端口：
+The following ports are mapped by default:
 
-| 端口 | 协议 | 用途 |
+| Port | Protocol | Purpose |
 | --- | --- | --- |
-| `9091` | TCP | Web UI 及 RPC 接口，启动后通此端口访问 Web UI（如 `http://localhost:9091`） |
-| `51413` | TCP/UDP | BT 数据传输端口，用于与其他节点交换数据 |
+| `9091` | TCP | Web UI and RPC interface — access the Web UI at `http://localhost:9091` |
+| `51413` | TCP/UDP | BitTorrent data transfer — used for peer connections; keeping this port open improves download performance |
 
-如果修改了 Transmission 在 config 目录下的配置文件中的端口设置，请确保在 `docker-compose.yml` 中也做相应修改。
+If you have modified the port settings in Transmission's configuration file located in the `config` directory, please ensure that you also update the corresponding port mappings in the `docker-compose.yml` file to reflect those changes.
 
-### 2. 手动安装
+### 2. Manual Install
 
-1. 打开 [Releases](https://github.com/hisproc/transmission-next-ui/releases) 页面
-2. 下载最新或稳定版本（如 `transmission-next-ui-v1.0.0.zip`）
-3. 解压并将其中的内容复制到 Transmission 的 Web 目录（如 `transmission/web/src`）
+1. Go to the [Releases](https://github.com/hisproc/transmission-next-ui/releases) page
+2. Download the latest or stable release (e.g. `transmission-next-ui-v1.0.0.zip`)
+3. Extract it and copy the contents to your transmission web directory (e.g. transmission/web/src)
 
-### 3. 源代码打包
+
+### 3. Build from Source
 
 ```bash
 git clone git@github.com:hisproc/transmission-next-ui.git
@@ -113,8 +105,8 @@ pnpm install
 pnpm build
 ```
 
-构建完成后，将 `dist/` 目录下的所有内容复制到 Transmission 的 Web 目录下即可。
+Then, copy the contents of the `dist/` folder to your transmission web directory.
 
-## 许可证
+## License
 
-本项目采用 [MIT 许可证](LICENSE) 进行授权。
+This project is licensed under the [MIT License](LICENSE).
